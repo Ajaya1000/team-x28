@@ -1,9 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 // import clsx from 'clsx';
-import {
-  makeStyles,
-  useTheme
-} from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -25,30 +22,27 @@ import SlideshowIcon from '@material-ui/icons/Slideshow';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import {
-  deepOrange,
-  deepPurple
-} from '@material-ui/core/colors';
-import './index.scss'
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import './index.scss';
 import { NavLink } from 'react-router-dom';
 import Bacteria from '../../assests/bacteria.svg';
 import CoronaVirus from '../../assests/coronavirus.svg';
 var drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   console.log('props is');
-  return ({
+  return {
     list: {
       color: '#fff',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     navItem: {
       backgroundColor: 'transparent',
       textDecoration: 'none',
       color: '#fff',
       '&:hover': {
-        backgroundColor: '#00000022'
-      }
+        backgroundColor: '#00000022',
+      },
     },
     listItem: {
       backgroundColor: 'inherit',
@@ -61,16 +55,16 @@ const useStyles = makeStyles((theme) => {
     selected: {
       backgroundColor: '#FF9E43',
       '&:hover': {
-        backgroundColor: '#FF9E43'
-      }
+        backgroundColor: '#FF9E43',
+      },
     },
     email: {
       fontSize: 13,
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
     },
     divider: {
       background: '#ffffff55',
-      width: '80%'
+      width: '80%',
     },
     userinfo: {
       display: 'flex',
@@ -79,25 +73,25 @@ const useStyles = makeStyles((theme) => {
       alignItems: 'center',
       color: '#fff',
       marginBottom: theme.spacing(2),
-      marginTop: theme.spacing(2)
+      marginTop: theme.spacing(2),
     },
     logo: {
       color: '#fff',
       marginLeft: theme.spacing(4),
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(4),
-      fontWeight: 800
+      fontWeight: 800,
     },
     purple: {
       color: theme.palette.getContrastText(deepPurple[500]),
       backgroundColor: deepPurple[500],
     },
     drawer: {
-      width: props => (props.isMobile ? '100%' : drawerWidth),
-      height:'100%',
+      width: (props) => (props.isMobile ? '100%' : drawerWidth),
+      height: '100%',
       flexShrink: 0,
       whiteSpace: 'nowrap',
-      backgroundColor: '#00000055'
+      backgroundColor: '#00000055',
     },
     // drawerMobile: {
     //   width: '100vw',
@@ -106,7 +100,10 @@ const useStyles = makeStyles((theme) => {
     //   backgroundColor: '#00000055'
     // },
     drawerOpen: {
-      width:props=>{console.log('props is' + props); return (props.isMobile?'100%':drawerWidth)},
+      width: (props) => {
+        console.log('props is' + props);
+        return props.isMobile ? '100%' : drawerWidth;
+      },
       height: '100%',
       backgroundColor: '#00000055',
       transition: theme.transitions.create('width', {
@@ -126,7 +123,7 @@ const useStyles = makeStyles((theme) => {
         width: theme.spacing(9) + 1,
       },
     },
-  });
+  };
 });
 export default function SideNav(props) {
   console.log(props);
@@ -135,168 +132,156 @@ export default function SideNav(props) {
   const togleDrawer = props.togleDrawer;
   const isMobile = props.isMobile;
   const classes = useStyles(isMobile);
-  const variant = (!isMobile) ? 'permanent' : 'temporary';
-  console.log('variant is'+ variant);
-  if(open || !isMobile){
+  const variant = !isMobile ? 'permanent' : 'temporary';
+  console.log('variant is' + variant);
+  if (open || !isMobile) {
     return (
-      < >
-      <CssBaseline />
-      
-      <SwipeableDrawer 
-        variant={variant}
-        open={open}
-        onOpen = {
-          () => {
+      <div>
+        <CssBaseline />
+
+        <SwipeableDrawer
+          variant={variant}
+          open={open}
+          onOpen={() => {
             console.log(togleDrawer);
-            togleDrawer(true)
-          }
-        }
-        onClose = {
-          () => {
+            togleDrawer(true);
+          }}
+          onClose={() => {
             console.log(togleDrawer);
-            togleDrawer(false)
-          }
-        }
-      >
-        < div style = {
-          {
-             backgroundColor: '#232A44',
-            width: drawerWidth,
-            height:'100%'
-          }
-        } >
-          <div className={classes.logo}>
-            <img alt={"bacteria"} src={CoronaVirus} width="80" height="80">
-            </img>
-            <Typography style={{}} >Covid19</Typography>
-            {/* <IconButton>
+            togleDrawer(false);
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: '#232A44',
+              width: drawerWidth,
+              height: '100%',
+            }}
+          >
+            <div className={classes.logo}>
+              <img
+                alt={'bacteria'}
+                src={CoronaVirus}
+                width='80'
+                height='80'
+              ></img>
+              <Typography style={{}}>Covid19</Typography>
+              {/* <IconButton>
               <
             </IconButton> */}
-          </div>
-          {/* <div className={classes.userinfo}>
+            </div>
+            {/* <div className={classes.userinfo}>
             <Avatar className={classes.purple}>A</Avatar>
             <Typography className={classes.email}>ajaymati@gmail.com</Typography>
           </div> */}
-          <List className={classes.list}>
-            < NavLink className = {
-              classes.navItem
-            }
-            to = '/home'
-            key = '1'
-            activeClassName={classes.selected} >
-              <ListItem className = {
-              classes.listItem
-            }
-            onClick = {
-              () => togleDrawer(false)
-            }
-             >
-                    < ListItemIcon style = {
-                    {
-                      minWidth:'40px'
-                    }
-                  } > < DashboardIcon style = {
-                    {
-                      color: '#fff'
-                    }
-                  }
-                  /> 
-                  </ListItemIcon >
-                  < ListItemText primary = 'Home' / >
-              </ListItem>
+            <List className={classes.list}>
+              <NavLink
+                className={classes.navItem}
+                to='/home'
+                key='1'
+                activeClassName={classes.selected}
+              >
+                <ListItem
+                  className={classes.listItem}
+                  onClick={() => togleDrawer(false)}
+                >
+                  <ListItemIcon
+                    style={{
+                      minWidth: '40px',
+                    }}
+                  >
+                    {' '}
+                    <DashboardIcon
+                      style={{
+                        color: '#fff',
+                      }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary='Home' />
+                </ListItem>
               </NavLink>
-            
-                          < NavLink className = {
-              classes.navItem
-            }
-            to = '/visualize'
-            key = '3'
-            activeClassName={classes.selected} >
-              <ListItem className = {
-              classes.listItem
-            }
-            onClick = {
-              () => togleDrawer(false)
-            }
-            >
-                    < ListItemIcon style = {
-                    {
-                      minWidth:'40px'
-                    }
-                  } > < InsertChartIcon style = {
-                    {
-                      color: '#fff'
-                    }
-                  }
-                  /> 
-                  </ListItemIcon >
-                  < ListItemText primary = 'Visualization' / >
-              </ListItem>
+
+              <NavLink
+                className={classes.navItem}
+                to='/visualize'
+                key='3'
+                activeClassName={classes.selected}
+              >
+                <ListItem
+                  className={classes.listItem}
+                  onClick={() => togleDrawer(false)}
+                >
+                  <ListItemIcon
+                    style={{
+                      minWidth: '40px',
+                    }}
+                  >
+                    {' '}
+                    <InsertChartIcon
+                      style={{
+                        color: '#fff',
+                      }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary='Visualization' />
+                </ListItem>
               </NavLink>
-              < NavLink className = {
-              classes.navItem
-            }
-            to = '/hospital'
-            key = '2'
-            activeClassName={classes.selected} >
-              <ListItem className = {
-              classes.listItem
-            }
-            onClick = {
-              () => togleDrawer(false)
-            }
-             >
-                
-                    < ListItemIcon style = {
-                    {
-                      minWidth:'40px'
-                    }
-                  } > < LocalHospitalIcon style = {
-                    {
-                      color: '#fff'
-                    }
-                  }
-                  /> 
-                  </ListItemIcon >
-                  < ListItemText primary = 'Hospitals' / >
-              </ListItem>
+              <NavLink
+                className={classes.navItem}
+                to='/hospital'
+                key='2'
+                activeClassName={classes.selected}
+              >
+                <ListItem
+                  className={classes.listItem}
+                  onClick={() => togleDrawer(false)}
+                >
+                  <ListItemIcon
+                    style={{
+                      minWidth: '40px',
+                    }}
+                  >
+                    {' '}
+                    <LocalHospitalIcon
+                      style={{
+                        color: '#fff',
+                      }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary='Hospitals' />
+                </ListItem>
               </NavLink>
-             < NavLink className = {
-              classes.navItem
-            }
-            to = '/notifications'
-            key = '4'
-            activeClassName={classes.selected} >
-              <ListItem className = {
-              classes.listItem
-            } 
-            onClick = {
-              () => togleDrawer(false)
-            }
-            >
-                
-                    < ListItemIcon style = {
-                    {
-                      minWidth:'40px'
-                    }
-                  } > < NotificationsActiveIcon style = {
-                    {
-                      color: '#fff'
-                    }
-                  }
-                  /> 
-                  </ListItemIcon >
-                  < ListItemText primary = 'Notifications' / >
-              </ListItem>
+              <NavLink
+                className={classes.navItem}
+                to='/notifications'
+                key='4'
+                activeClassName={classes.selected}
+              >
+                <ListItem
+                  className={classes.listItem}
+                  onClick={() => togleDrawer(false)}
+                >
+                  <ListItemIcon
+                    style={{
+                      minWidth: '40px',
+                    }}
+                  >
+                    {' '}
+                    <NotificationsActiveIcon
+                      style={{
+                        color: '#fff',
+                      }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary='Notifications' />
+                </ListItem>
               </NavLink>
-          </List>
-        </div>
+            </List>
+          </div>
         </SwipeableDrawer>
-      </>
-    )
-  }
-  else{
+      </div>
+    );
+  } else {
     return null;
   }
-    
 }
